@@ -1,0 +1,59 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _View = _interopRequireDefault(require("./View.js"));
+
+var _model = require("../model.js");
+
+var _icons = _interopRequireDefault(require("url:../../img/icons.svg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class PaginationView extends _View.default {
+  constructor(...args) {
+    super(...args);
+
+    _defineProperty(this, "_parentElement", document.querySelector('.pagination'));
+  }
+
+  _generateMarkup() {
+    const currentPage = currentPage;
+    const numOfPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
+    console.log(numOfPages); // Page 1, and there are more pages
+
+    if (currentPage === 1 && numOfPages > 1) {
+      return 'Page 1, other pages';
+    } // Page 1, and there are no more pages
+
+
+    if (currentPage === 1 && numOfPages === 1) {
+      return 'Page 1, no other pages';
+    } // Last page
+
+
+    if (currentPage === numOfPages && numOfPages > 1) {
+      return `
+        <button class="btn--inline pagination__btn--prev">
+          <svg class="search__icon">
+            <use href="src/img/icons.svg#icon-arrow-left"></use>
+          </svg>
+          <span>Page 1</span>
+        </button>
+      `;
+    } // Other page
+
+
+    return 'Some other page';
+  }
+
+}
+
+var _default = new PaginationView();
+
+exports.default = _default;
